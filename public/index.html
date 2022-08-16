@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/spinner.css"/>
+
+    <script src="./js/script.js" defer></script>
+    <title>Blank Template</title>
+  </head>
+  <body>
+    <nav>Navigation Bar</nav>
+    <section>
+      <form id="login-form" onsubmit="login">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" />
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+        <button id="login-btn" form="login-form" type="submit">Login</button>
+      </form>
+      <form id="register-form" onsubmit="login">
+        <label for="username">Username</label>
+        <input type="text" name="registerusername" id="registerusername" />
+        <label for="password">Password</label>
+        <input type="password" name="registerpassword" id="registerpassword" />
+        <label for="firstname">First Name</label>
+        <input type="text" name="registerfirstname" id="registerfirstname" />
+        <label for="surname">Surname</label>
+        <input type="text" name="registersurname" id="registersurname" />
+        <label for="age">Age</label>
+        <input type="text" name="registerage" id="registerage" />
+        <button id="register-btn" form="register-form" type="submit">Register</button>
+      </form>
+      <div id="loader"><div class="lds-hourglass" ></div></div>
+      <div id="content">Content</div>
+    </section>
+  </body>
+</html>
