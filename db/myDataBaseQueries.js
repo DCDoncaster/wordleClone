@@ -52,6 +52,9 @@ await Users.create(
 })
 
 }
+// passwordgenerator(1500)
+
+
 // DONE call this based on the username given in html and used for login verification 
 async function firstName(){
     const first = await Users.findOne({
@@ -60,11 +63,6 @@ async function firstName(){
         }
     })
 }
-
-
-
-
-// passwordgenerator(1500)
 
 
 

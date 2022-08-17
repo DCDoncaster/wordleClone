@@ -34,17 +34,16 @@ app.get('/', (req, res) => {
 
 // localhost:3000/users/find?firstname=Uri&surname=Aagaard  - finds username from first and last name supplied
 app.get("/users/find", async (req,res) =>{
-  console.log(req.query.firstname)
+  console.log(req.query.firstname + req.query.surname)
   const findUserName = await Users.findOne({where: {firstName: req.query.firstname, surname: req.query.surname}})
+  
   let {username} = findUserName
   console.log(username)
-  res.send(username)
+  res.send(username)  //can this be used to email to the email address on file?
 })
 
 app.post('/', async (req, res) => {
-
   const { username, password } = req.body;
-
   //check the received username exists in the database
   let doesExist = await Users.count({
     where: {
@@ -77,6 +76,25 @@ res.send({ loggedIn: 'register'})
 //need to take this and use it to manipulate the input on the front end.
 }
 );
+
+//creates new user if receives via post request - needs validation putting in 
+app.post('/createUser',async(req,res)=>{
+  await Users.create(req.body)
+  res.send('User Created')
+})
+
+
+//delete user based on username and password being supplied. 
+app.delete('/deleteUser', async(req,res)=>{
+  await Users.destroy({
+    where: {   
+      username: req.body.username,
+      password: req.body.password
+    }
+  })
+  res.send('User Deleted')  //TODO - add in some form of check that password matches and respond differently if not
+})
+
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on http://localhost:${PORT}.`);
