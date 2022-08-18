@@ -1,12 +1,15 @@
 //This is where I'll need to registered users in the long run
 const express = require('express');
 const {Users} = require('./db/myDataBaseQueries');
+const users = require('./routes/users')
 const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
+app.use('/users',users)
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -23,24 +26,6 @@ app.get('/', (req, res) => {
 });
 
 
-// app.get('/users/:user', async(req,res)=>{
-//   let newString = req.params.user.toLowerCase()
-//   console.log(newString)
-//   const queriedUser = await Users.findOne({where: { username: newString}})
-//   let {firstName, surname} = queriedUser
-//   console.log(firstName + surname)
-//   res.sendStatus(200)
-// })
-
-// localhost:3000/users/find?firstname=Uri&surname=Aagaard  - finds username from first and last name supplied
-app.get("/users/find", async (req,res) =>{
-  console.log(req.query.firstname + req.query.surname)
-  const findUserName = await Users.findOne({where: {firstName: req.query.firstname, surname: req.query.surname}})
-  
-  let {username} = findUserName
-  console.log(username)
-  res.send(username)  //can this be used to email to the email address on file?
-})
 
 app.post('/', async (req, res) => {
   const { username, password } = req.body;
@@ -81,18 +66,6 @@ res.send({ loggedIn: 'register'})
 app.post('/createUser',async(req,res)=>{
   await Users.create(req.body)
   res.send('User Created')
-})
-
-
-//delete user based on username and password being supplied. 
-app.delete('/deleteUser', async(req,res)=>{
-  await Users.destroy({
-    where: {   
-      username: req.body.username,
-      password: req.body.password
-    }
-  })
-  res.send('User Deleted')  //TODO - add in some form of check that password matches and respond differently if not
 })
 
 
