@@ -62,11 +62,7 @@ res.send({ loggedIn: 'register'})
 }
 );
 
-//creates new user if receives via post request - needs validation putting in 
-app.post('/createUser',async(req,res)=>{
-  await User.create(req.body)
-  res.send('User Created')
-})
+
 
 
 app.listen(PORT, () => {

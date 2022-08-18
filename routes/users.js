@@ -35,5 +35,10 @@ router.get("/", async (req,res) =>{
     res.send('User Deleted')  //TODO - add in some form of check that password matches and respond differently if not
   })
   
+  //creates new user if receives via post request - needs validation putting in 
+router.post('/',async(req,res)=>{
+  await User.create(req.body)
+  res.send('User Created')
+})
   
 module.exports = router
