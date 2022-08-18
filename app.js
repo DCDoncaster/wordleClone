@@ -1,14 +1,14 @@
 //This is where I'll need to registered users in the long run
 const express = require('express');
-const {Users} = require('./db/myDataBaseQueries');
-const users = require('./routes/users')
+const {User} = require('./db/myDataBaseQueries');
+const user = require('./routes/users')
 const app = express();
 const path = require('path');
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
-app.use('/users',users)
+app.use('/users',user)
 
 
 app.use((req, res, next) => {
@@ -30,14 +30,14 @@ app.get('/', (req, res) => {
 app.post('/', async (req, res) => {
   const { username, password } = req.body;
   //check the received username exists in the database
-  let doesExist = await Users.count({
+  let doesExist = await User.count({
     where: {
       username: username
     }
   })
 //If exists count will be 1, if not 0. Use this to determine whether it exists and run from there. 
 if (doesExist > 0){
-  let pulledRecord = await Users.findOne({
+  let pulledRecord = await User.findOne({
     where: {
         username: username
     }
@@ -64,7 +64,7 @@ res.send({ loggedIn: 'register'})
 
 //creates new user if receives via post request - needs validation putting in 
 app.post('/createUser',async(req,res)=>{
-  await Users.create(req.body)
+  await User.create(req.body)
   res.send('User Created')
 })
 
