@@ -30,3 +30,11 @@ Async calls are also used in response to lookups for user details, either a sear
 ## Element 2: CSS Arrangements
 
 The layout for the app will be written predominantly in a seperate stylesheet used to manipulate the content of the html elements. The intent is to dynamically change the layout based on what is going on at any given time, from manipulating the appearance of login/registration details to colouring of letters in the main game.
+
+## Element 3: HTTP Queries and Routing
+
+Two routes set, one for Score Queries and one for User Queries. These can  handle get/post/delete style HTTP Requests. Documentation can be found in the comments section of the routers
+`TODO` Add Documentation for this to Readme
+
+## Element 4: Databases
+Two tables set in database, one for user information and the other to store any scores that they may have earned in their games. 

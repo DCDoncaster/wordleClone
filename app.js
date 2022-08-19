@@ -2,13 +2,16 @@
 const express = require('express');
 const {User} = require('./db/myDataBaseQueries');
 const user = require('./routes/users')
+const score = require('./routes/scores')
 const app = express();
 const path = require('path');
+let currentUser = ''; //used to assign the record from the DB to so we know who to allocate scores to.
 const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use('/users',user)
+app.use('/scores',score)
 
 
 app.use((req, res, next) => {
@@ -42,27 +45,22 @@ if (doesExist > 0){
         username: username
     }
 })
-  // await setTimeout(() => {
     if (password === pulledRecord.password) {   
     let payload = {
     loggedIn: true,
     firstName: pulledRecord.firstName
   }
-      res.send(payload);
-      
+  currentUser = pulledRecord
+  console.log(currentUser)
+      res.send(payload);    
       return;
     }
     res.send({ loggedIn: false });
     return;
-  // }, Math.random() * 4000);
 }
 //This is where we do things if the username doesn't exist
 res.send({ loggedIn: 'register'}) 
-//need to take this and use it to manipulate the input on the front end.
-}
-);
-
-
+});
 
 
 app.listen(PORT, () => {

@@ -23,10 +23,7 @@ async function login(e) {
   });
   let output = await response.json();
   spinnyWheel.style.display = "none";
-  
-// TODO display and offer a chance to register if user not found
-
-  (output.firstName) ? contentText.innerText = "Welcome back " + output.firstName : (output.loggedIn === false) ? contentText.innerText = 'Incorrect Password, please retry' : contentText.innerText = 'User not found, please register'
-  
+  // TODO display and offer a chance to register if user not found
+  (output.firstName) ? contentText.innerText = "Welcome back " + output.firstName : (output.loggedIn === false) ? contentText.innerText = 'Incorrect Password, please retry' : contentText.innerText = 'User not found, please register' 
 }
 
