@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
   console.log(username);
   res.send(username); //can this be used to email to the email address on file?
 });
-//delete user based on username and password being supplied.
+//DONE delete user based on username and password being supplied.
 router.delete("/", async (req, res) => {
   await User.destroy({
     where: {
@@ -35,8 +35,11 @@ router.delete("/", async (req, res) => {
   res.send("User Deleted"); //TODO - Adjust resopnse if password does not match/not found
 });
 
-//TODO creates new user if receives via post request - needs validation putting in
+//TODO - add password change functionality
 
+
+
+//DONE creates new user if receives via post request - needs validation putting in
 router.post(
   "/",
   check("username").not().trim().isEmpty(),
